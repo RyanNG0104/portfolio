@@ -65,96 +65,165 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !menu.hidden) setMenu(false);
 });
 
-/* ---------- Conta-giros do hero ---------- */
-const SVG_NS = 'http://www.w3.org/2000/svg';
-const gauge = document.getElementById('gauge');
-const CX = 200;
-const CY = 200;
-const START = -135; // ângulo inicial (0° = topo, sentido horário)
-const SWEEP = 270;
+/* ---------- Globo 3D de partículas (hero) ---------- */
+(function orbScene() {
+  const canvas = document.getElementById('orb');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
 
-function polar(r, deg) {
-  const rad = (deg * Math.PI) / 180;
-  return [CX + r * Math.sin(rad), CY - r * Math.cos(rad)];
-}
+  const TECH = ['React', 'Node.js', 'Java', 'Python', 'SQL Server', 'AWS', 'LLMs', 'JavaScript', 'Spring Boot', 'ColdFusion'];
+  const HIGHLIGHT = new Set(['AWS', 'LLMs']);
 
-function arcPath(r, from, to) {
-  const [x1, y1] = polar(r, from);
-  const [x2, y2] = polar(r, to);
-  const large = to - from > 180 ? 1 : 0;
-  return `M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}`;
-}
+  // Pontos distribuídos uniformemente numa esfera unitária (espiral de Fibonacci)
+  function fibonacciSphere(n) {
+    const pts = [];
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < n; i++) {
+      const y = 1 - (i / (n - 1)) * 2;
+      const r = Math.sqrt(1 - y * y);
+      const t = golden * i;
+      pts.push([Math.cos(t) * r, y, Math.sin(t) * r]);
+    }
+    return pts;
+  }
 
-// Marcações do mostrador (as últimas ficam em roxo, como a "faixa vermelha" de um conta-giros)
-const ticks = document.getElementById('gauge-ticks');
-const TICKS = 40;
-for (let i = 0; i <= TICKS; i++) {
-  const deg = START + (SWEEP * i) / TICKS;
-  const major = i % 5 === 0;
-  const [x1, y1] = polar(176, deg);
-  const [x2, y2] = polar(major ? 156 : 166, deg);
-  const line = document.createElementNS(SVG_NS, 'line');
-  line.setAttribute('x1', x1); line.setAttribute('y1', y1);
-  line.setAttribute('x2', x2); line.setAttribute('y2', y2);
-  line.setAttribute('class', `gauge__tick${major ? ' gauge__tick--major' : ''}${i >= 34 ? ' gauge__tick--red' : ''}`);
-  ticks.appendChild(line);
-}
-const trackD = arcPath(140, START, START + SWEEP);
-document.getElementById('gauge-track').setAttribute('d', trackD);
-document.getElementById('gauge-arc').setAttribute('d', trackD);
+  const spherePts = fibonacciSphere(520);
+  const labelPts = fibonacciSphere(TECH.length + 2).slice(1, -1); // evita os polos
 
-const gaugeArc = document.getElementById('gauge-arc');
-const gaugeNeedle = document.getElementById('gauge-needle');
-const gaugeValue = document.getElementById('gauge-value');
+  // Anel orbital inclinado
+  const ringPts = [];
+  const RING_N = 160;
+  const tiltX = 1.15;
+  const tiltZ = 0.38;
+  for (let i = 0; i < RING_N; i++) {
+    const t = (i / RING_N) * Math.PI * 2;
+    let x = Math.cos(t) * 1.6;
+    let y = 0;
+    let z = Math.sin(t) * 1.6;
+    // inclinação em X
+    const y1 = y * Math.cos(tiltX) - z * Math.sin(tiltX);
+    const z1 = y * Math.sin(tiltX) + z * Math.cos(tiltX);
+    // inclinação em Z
+    const x2 = x * Math.cos(tiltZ) - y1 * Math.sin(tiltZ);
+    const y2 = x * Math.sin(tiltZ) + y1 * Math.cos(tiltZ);
+    ringPts.push([x2, y2, z1]);
+  }
 
-function setGauge(value) {
-  const v = Math.max(0, Math.min(1, value));
-  gaugeArc.style.strokeDashoffset = String(100 - v * 100);
-  gaugeNeedle.style.transform = `rotate(${START + v * SWEEP}deg)`;
-}
+  let size = 0;
+  let dpr = 1;
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    size = canvas.clientWidth;
+    canvas.width = size * dpr;
+    canvas.height = size * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-// Modos que o mostrador alterna sozinho
-const MODES = [
-  { name: 'Back-end', value: 0.82 },
-  { name: 'APIs REST', value: 0.68 },
-  { name: 'Front-end', value: 0.55 },
-  { name: 'IA Generativa', value: 0.94 },
-];
-let modeIndex = 0;
-let tracking = false;
+  // Rotação: base automática + inclinação pelo mouse
+  let spin = 0;
+  let tiltTargetX = 0.25, tiltTargetY = 0;
+  let tiltX0 = 0.25, tiltY0 = 0;
 
-function showMode(i) {
-  const mode = MODES[i];
-  gaugeValue.classList.add('is-swapping');
-  setTimeout(() => {
-    gaugeValue.textContent = mode.name;
-    gaugeValue.classList.remove('is-swapping');
-  }, 250);
-  setGauge(mode.value);
-}
-
-setTimeout(() => showMode(0), 600);
-if (!reduceMotion) {
-  setInterval(() => {
-    if (tracking || document.hidden) return;
-    modeIndex = (modeIndex + 1) % MODES.length;
-    showMode(modeIndex);
-  }, 3000);
-
-  // Na capa, o ponteiro acompanha a posição horizontal do mouse
   hero.addEventListener('pointermove', (e) => {
-    if (e.pointerType !== 'mouse') return;
-    tracking = true;
-    gauge.classList.add('is-tracking');
     const rect = hero.getBoundingClientRect();
-    setGauge((e.clientX - rect.left) / rect.width);
+    const nx = (e.clientX - rect.left) / rect.width - 0.5;
+    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    tiltTargetY = nx * 1.2;
+    tiltTargetX = 0.25 + ny * 0.8;
   });
-  hero.addEventListener('pointerleave', () => {
-    tracking = false;
-    gauge.classList.remove('is-tracking');
-    showMode(modeIndex);
-  });
-}
+  hero.addEventListener('pointerleave', () => { tiltTargetX = 0.25; tiltTargetY = 0; });
+
+  function project(p, R, rotY, rotX) {
+    const [x, y, z] = p;
+    const cy = Math.cos(rotY), sy = Math.sin(rotY);
+    const cx = Math.cos(rotX), sx = Math.sin(rotX);
+    const x1 = x * cy + z * sy;
+    const z1 = -x * sy + z * cy;
+    const y2 = y * cx - z1 * sx;
+    const z2 = y * sx + z1 * cx;
+    const f = 3.2;
+    const scale = f / (f + z2);
+    return { x: size / 2 + x1 * R * scale, y: size / 2 + y2 * R * scale, z: z2, s: scale };
+  }
+
+  function draw() {
+    const R = size * 0.27;
+    ctx.clearRect(0, 0, size, size);
+
+    tiltX0 += (tiltTargetX - tiltX0) * 0.06;
+    tiltY0 += (tiltTargetY - tiltY0) * 0.06;
+    const rotY = spin + tiltY0;
+    const rotX = tiltX0;
+
+    // Anel: parte de trás
+    const ring = ringPts.map((p) => project(p, R, rotY * 0.6, rotX));
+    const drawRing = (front) => {
+      for (const q of ring) {
+        if ((q.z < 0) !== front) continue;
+        const a = front ? 0.85 : 0.25;
+        ctx.fillStyle = `rgba(168, 85, 247, ${a})`;
+        ctx.beginPath();
+        ctx.arc(q.x, q.y, 1.6 * q.s, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+    drawRing(false);
+
+    // Esfera
+    for (const p of spherePts) {
+      const q = project(p, R, rotY, rotX);
+      const depth = (1 - q.z) / 2; // 0 (fundo) a 1 (frente)
+      const a = 0.12 + depth * 0.8;
+      const r = (0.7 + depth * 1.5) * q.s;
+      ctx.fillStyle = depth > 0.82
+        ? `rgba(243, 232, 255, ${a})`
+        : `rgba(192, 132, 252, ${a})`;
+      ctx.beginPath();
+      ctx.arc(q.x, q.y, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Anel: parte da frente
+    drawRing(true);
+
+    // Rótulos das tecnologias orbitando
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    TECH.forEach((name, i) => {
+      const [x, y, z] = labelPts[i];
+      const q = project([x * 1.35, y * 1.35, z * 1.35], R, rotY * 0.85, rotX);
+      const depth = (1 - q.z / 1.35) / 2;
+      const alpha = 0.08 + Math.pow(depth, 2) * 0.92;
+      const fontSize = Math.max(10, size * 0.026) * q.s;
+      ctx.font = `600 ${fontSize}px Archivo, Arial, sans-serif`;
+      ctx.fillStyle = HIGHLIGHT.has(name)
+        ? `rgba(192, 132, 252, ${alpha})`
+        : `rgba(255, 255, 255, ${alpha})`;
+      ctx.fillText(name.toUpperCase(), q.x, q.y);
+    });
+  }
+
+  // Só anima enquanto a capa está visível (economiza bateria)
+  let visible = true;
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(hero);
+
+  function loop() {
+    if (visible && !document.hidden) {
+      spin += 0.0035;
+      draw();
+    }
+    requestAnimationFrame(loop);
+  }
+
+  if (reduceMotion) {
+    draw();
+    window.addEventListener('resize', draw);
+  } else {
+    requestAnimationFrame(loop);
+  }
+})();
 
 /* ---------- Cursor personalizado ---------- */
 const cursor = document.getElementById('cursor');

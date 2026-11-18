@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=5" />
 
   <script>
     // Aplica o tema antes de renderizar (evita "piscar"): escolha salva ou preferência do sistema
@@ -100,34 +100,8 @@
           </div>
         </div>
 
-        <div class="gauge reveal" id="gauge" aria-hidden="true">
-          <div class="gauge__dial">
-            <svg viewBox="0 0 400 400">
-              <defs>
-                <linearGradient id="gauge-grad" x1="0" y1="1" x2="1" y2="0">
-                  <stop offset="0" stop-color="#6d28d9" />
-                  <stop offset="1" stop-color="#c084fc" />
-                </linearGradient>
-              </defs>
-              <circle class="gauge__ring" cx="200" cy="200" r="192" />
-              <g id="gauge-ticks"></g>
-              <path class="gauge__track" id="gauge-track" pathLength="100" />
-              <path class="gauge__arc" id="gauge-arc" pathLength="100" />
-              <g class="gauge__needle" id="gauge-needle">
-                <line x1="200" y1="214" x2="200" y2="58" />
-                <circle cx="200" cy="200" r="11" />
-                <circle class="gauge__hub" cx="200" cy="200" r="4" />
-              </g>
-            </svg>
-            <div class="gauge__readout">
-              <span class="gauge__label">Modo</span>
-              <span class="gauge__value" id="gauge-value">Back-end</span>
-            </div>
-          </div>
-          <dl class="gauge__info">
-            <div><dt>Em produção</dt><dd>Itpower Software</dd></div>
-            <div><dt>Próxima parada</dt><dd>IA Generativa · AWS</dd></div>
-          </dl>
+        <div class="orb reveal" aria-hidden="true">
+          <canvas id="orb"></canvas>
         </div>
       </div>
 
@@ -472,6 +446,6 @@
     <div class="cursor__dot" id="cursor-dot"></div>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=5"></script>
 </body>
 </html>
