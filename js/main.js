@@ -2,6 +2,23 @@
    Portfólio · Ryan Moreira — interações
    ========================================================= */
 
+/* ---------- Proteção contra página antiga no cache ----------
+   Se o navegador abrir um index.html velho (guardado em cache), este
+   script, que é sempre o mais novo, detecta a diferença de versão,
+   baixa a página atual e recarrega uma única vez. */
+const SITE_BUILD = '6';
+(function ensureFreshPage() {
+  const meta = document.querySelector('meta[name="site-build"]');
+  if (meta && meta.content === SITE_BUILD) return;
+  let tried = null;
+  try { tried = sessionStorage.getItem('reloaded-for-build'); } catch (e) {}
+  if (tried === SITE_BUILD) return; // já tentou, não entra em loop
+  try { sessionStorage.setItem('reloaded-for-build', SITE_BUILD); } catch (e) {}
+  fetch(location.href, { cache: 'reload' })
+    .catch(() => {})
+    .finally(() => location.reload());
+})();
+
 const GITHUB_USER = 'RyanNG0104';
 
 // Repositórios que já estão na coleção (ou não fazem sentido listar)
