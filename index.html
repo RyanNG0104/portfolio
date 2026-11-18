@@ -18,9 +18,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <!-- Versão do site: precisa ser igual ao SITE_BUILD em js/main.js -->
-  <meta name="site-build" content="7" />
+  <meta name="site-build" content="8" />
   <meta http-equiv="Cache-Control" content="no-cache" />
-  <link rel="stylesheet" href="css/style.css?v=7" />
+  <link rel="stylesheet" href="css/style.css?v=8" />
 
   <script>
     // Aplica o tema antes de renderizar (evita "piscar"): escolha salva ou preferência do sistema
@@ -271,56 +271,33 @@
       </div>
 
       <div class="carousel" id="carousel" tabindex="0" aria-label="Projetos em destaque">
-        <!-- Digital Drive -->
+        <!-- SaturnIA -->
         <article class="model">
           <div class="model__visual">
             <span class="model__num">01</span>
             <svg class="model__art" viewBox="0 0 240 120" aria-hidden="true">
-              <path d="M8 78 C10 68 20 63 42 59 L80 53 C98 40 120 34 148 36 C166 38 178 46 192 52 C214 54 228 60 232 70 L232 78" />
-              <path d="M90 53 C104 43 120 40 142 41 L160 51 Z" />
-              <path d="M8 78 H44 M76 78 H168 M200 78 H232" />
-              <circle cx="60" cy="78" r="15" /><circle cx="60" cy="78" r="6" />
-              <circle cx="184" cy="78" r="15" /><circle cx="184" cy="78" r="6" />
-              <path class="accent" d="M24 96 H216" />
+              <circle cx="120" cy="58" r="36" />
+              <circle cx="120" cy="58" r="17" />
+              <circle cx="120" cy="58" r="7" />
+              <circle cx="114" cy="52" r="2.6" fill="#ffffff" stroke="none" />
+              <circle cx="96" cy="40" r="1.4" fill="#ffffff" stroke="none" />
+              <circle cx="146" cy="44" r="1.4" fill="#ffffff" stroke="none" />
+              <circle cx="104" cy="80" r="1.4" fill="#ffffff" stroke="none" />
+              <circle cx="141" cy="76" r="1.4" fill="#ffffff" stroke="none" />
+              <ellipse class="accent" cx="120" cy="58" rx="80" ry="15" transform="rotate(-14 120 58)" />
             </svg>
-            <span class="model__tag">React · SPA</span>
+            <span class="model__tag">IA · Online</span>
           </div>
           <div class="model__body">
-            <h3>Digital Drive</h3>
-            <p>Marketplace de carros novos e seminovos, com rotas, login, cadastro de usuários e anúncio e listagem de veículos consumindo uma API REST simulada.</p>
+            <h3>SaturnIA</h3>
+            <p>Chat de IA com contas de usuário, histórico de conversas e memória: ela aprende fatos sobre cada pessoa e usa nas próximas conversas. Respostas em tempo real e um olho de partículas que acompanha o cursor.</p>
             <dl class="model__specs">
-              <div><dt>Stack</dt><dd>React · Vite · React Router</dd></div>
-              <div><dt>Dados</dt><dd>JSON Server</dd></div>
+              <div><dt>Stack</dt><dd>JavaScript · Cloudflare Workers</dd></div>
+              <div><dt>IA e dados</dt><dd>Llama 3.3 · D1 (SQLite)</dd></div>
             </dl>
             <div class="model__links">
-              <a href="https://github.com/RyanNG0104/Digital-Drive" target="_blank" rel="noopener" class="link-arrow">Ver código</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- iPhone 17 -->
-        <article class="model">
-          <div class="model__visual">
-            <span class="model__num">02</span>
-            <svg class="model__art" viewBox="0 0 240 120" aria-hidden="true">
-              <rect x="96" y="6" width="48" height="98" rx="10" />
-              <rect x="100" y="10" width="40" height="90" rx="7" />
-              <rect x="112" y="13" width="16" height="4" rx="2" />
-              <rect x="150" y="10" width="40" height="40" rx="8" />
-              <circle cx="161" cy="21" r="6" /><circle cx="179" cy="21" r="6" /><circle cx="161" cy="39" r="6" />
-              <path class="accent" d="M24 112 H216" />
-            </svg>
-            <span class="model__tag">Landing page</span>
-          </div>
-          <div class="model__body">
-            <h3>iPhone 17</h3>
-            <p>Página de produto com hero em tela cheia, destaques, seletor de cores e navegação, toda componentizada.</p>
-            <dl class="model__specs">
-              <div><dt>Stack</dt><dd>React · Vite</dd></div>
-              <div><dt>Estilo</dt><dd>Tailwind CSS</dd></div>
-            </dl>
-            <div class="model__links">
-              <a href="https://github.com/RyanNG0104/iphone17-react" target="_blank" rel="noopener" class="link-arrow">Ver código</a>
+              <a href="https://ryanng0104.github.io/saturnia/" target="_blank" rel="noopener" class="link-arrow">Ver online</a>
+              <a href="https://github.com/RyanNG0104/saturnia" target="_blank" rel="noopener" class="link-arrow">Ver código</a>
             </div>
           </div>
         </article>
@@ -328,7 +305,7 @@
         <!-- NG Coffee -->
         <article class="model">
           <div class="model__visual">
-            <span class="model__num">03</span>
+            <span class="model__num">02</span>
             <svg class="model__art" viewBox="0 0 240 120" aria-hidden="true">
               <path d="M82 46 H150 V80 C150 94 138 104 124 104 H108 C94 104 82 94 82 80 Z" />
               <path d="M150 54 H160 C170 54 174 62 174 68 C174 76 168 82 158 82 H150" />
@@ -354,7 +331,7 @@
         <!-- Pizzaria API -->
         <article class="model">
           <div class="model__visual">
-            <span class="model__num">04</span>
+            <span class="model__num">03</span>
             <svg class="model__art" viewBox="0 0 240 120" aria-hidden="true">
               <path d="M120 104 L72 22 C102 8 138 8 168 22 Z" />
               <path d="M76 30 C104 18 136 18 164 30" />
@@ -449,6 +426,6 @@
     <div class="cursor__dot" id="cursor-dot"></div>
   </div>
 
-  <script src="js/main.js?v=7"></script>
+  <script src="js/main.js?v=8"></script>
 </body>
 </html>

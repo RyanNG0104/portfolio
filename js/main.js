@@ -6,7 +6,7 @@
    Se o navegador abrir um index.html velho (guardado em cache), este
    script, que é sempre o mais novo, detecta a diferença de versão,
    baixa a página atual e recarrega uma única vez. */
-const SITE_BUILD = '7';
+const SITE_BUILD = '8';
 (function ensureFreshPage() {
   const meta = document.querySelector('meta[name="site-build"]');
   if (meta && meta.content === SITE_BUILD) return;
@@ -21,14 +21,15 @@ const SITE_BUILD = '7';
 
 const GITHUB_USER = 'RyanNG0104';
 
-// Repositórios que já estão na coleção (ou não fazem sentido listar)
+// Repositórios que já estão na coleção (ou que não devem aparecer na lista)
 const HIDDEN_REPOS = new Set([
   'RyanNG0104',
   'portfolio',
-  'Digital-Drive',
-  'iphone17-react',
+  'saturnia',
   'COFFE-PAGE',
   'pizzariacurso',
+  'Digital-Drive',
+  'iphone17-react',
 ]);
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
