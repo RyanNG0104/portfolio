@@ -100,15 +100,35 @@
           </div>
         </div>
 
-        <figure class="hero__portrait reveal">
-          <div class="hero__photo">
-            <img src="https://avatars.githubusercontent.com/u/159392543?v=4" alt="Retrato de Ryan Moreira" width="460" height="460" />
+        <div class="gauge reveal" id="gauge" aria-hidden="true">
+          <div class="gauge__dial">
+            <svg viewBox="0 0 400 400">
+              <defs>
+                <linearGradient id="gauge-grad" x1="0" y1="1" x2="1" y2="0">
+                  <stop offset="0" stop-color="#6d28d9" />
+                  <stop offset="1" stop-color="#c084fc" />
+                </linearGradient>
+              </defs>
+              <circle class="gauge__ring" cx="200" cy="200" r="192" />
+              <g id="gauge-ticks"></g>
+              <path class="gauge__track" id="gauge-track" pathLength="100" />
+              <path class="gauge__arc" id="gauge-arc" pathLength="100" />
+              <g class="gauge__needle" id="gauge-needle">
+                <line x1="200" y1="214" x2="200" y2="58" />
+                <circle cx="200" cy="200" r="11" />
+                <circle class="gauge__hub" cx="200" cy="200" r="4" />
+              </g>
+            </svg>
+            <div class="gauge__readout">
+              <span class="gauge__label">Modo</span>
+              <span class="gauge__value" id="gauge-value">Back-end</span>
+            </div>
           </div>
-          <figcaption>
-            <span>Desenvolvedor de Sistemas</span>
-            <span>Itpower Software</span>
-          </figcaption>
-        </figure>
+          <dl class="gauge__info">
+            <div><dt>Em produção</dt><dd>Itpower Software</dd></div>
+            <div><dt>Próxima parada</dt><dd>IA Generativa · AWS</dd></div>
+          </dl>
+        </div>
       </div>
 
       <a href="#ficha" class="hero__scroll" aria-label="Rolar para a ficha técnica">
@@ -445,6 +465,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- Cursor personalizado (só aparece em dispositivos com mouse) -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__ring" id="cursor-ring"></div>
+    <div class="cursor__dot" id="cursor-dot"></div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>

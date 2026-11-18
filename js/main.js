@@ -65,6 +65,130 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !menu.hidden) setMenu(false);
 });
 
+/* ---------- Conta-giros do hero ---------- */
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const gauge = document.getElementById('gauge');
+const CX = 200;
+const CY = 200;
+const START = -135; // ângulo inicial (0° = topo, sentido horário)
+const SWEEP = 270;
+
+function polar(r, deg) {
+  const rad = (deg * Math.PI) / 180;
+  return [CX + r * Math.sin(rad), CY - r * Math.cos(rad)];
+}
+
+function arcPath(r, from, to) {
+  const [x1, y1] = polar(r, from);
+  const [x2, y2] = polar(r, to);
+  const large = to - from > 180 ? 1 : 0;
+  return `M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}`;
+}
+
+// Marcações do mostrador (as últimas ficam em roxo, como a "faixa vermelha" de um conta-giros)
+const ticks = document.getElementById('gauge-ticks');
+const TICKS = 40;
+for (let i = 0; i <= TICKS; i++) {
+  const deg = START + (SWEEP * i) / TICKS;
+  const major = i % 5 === 0;
+  const [x1, y1] = polar(176, deg);
+  const [x2, y2] = polar(major ? 156 : 166, deg);
+  const line = document.createElementNS(SVG_NS, 'line');
+  line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+  line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+  line.setAttribute('class', `gauge__tick${major ? ' gauge__tick--major' : ''}${i >= 34 ? ' gauge__tick--red' : ''}`);
+  ticks.appendChild(line);
+}
+const trackD = arcPath(140, START, START + SWEEP);
+document.getElementById('gauge-track').setAttribute('d', trackD);
+document.getElementById('gauge-arc').setAttribute('d', trackD);
+
+const gaugeArc = document.getElementById('gauge-arc');
+const gaugeNeedle = document.getElementById('gauge-needle');
+const gaugeValue = document.getElementById('gauge-value');
+
+function setGauge(value) {
+  const v = Math.max(0, Math.min(1, value));
+  gaugeArc.style.strokeDashoffset = String(100 - v * 100);
+  gaugeNeedle.style.transform = `rotate(${START + v * SWEEP}deg)`;
+}
+
+// Modos que o mostrador alterna sozinho
+const MODES = [
+  { name: 'Back-end', value: 0.82 },
+  { name: 'APIs REST', value: 0.68 },
+  { name: 'Front-end', value: 0.55 },
+  { name: 'IA Generativa', value: 0.94 },
+];
+let modeIndex = 0;
+let tracking = false;
+
+function showMode(i) {
+  const mode = MODES[i];
+  gaugeValue.classList.add('is-swapping');
+  setTimeout(() => {
+    gaugeValue.textContent = mode.name;
+    gaugeValue.classList.remove('is-swapping');
+  }, 250);
+  setGauge(mode.value);
+}
+
+setTimeout(() => showMode(0), 600);
+if (!reduceMotion) {
+  setInterval(() => {
+    if (tracking || document.hidden) return;
+    modeIndex = (modeIndex + 1) % MODES.length;
+    showMode(modeIndex);
+  }, 3000);
+
+  // Na capa, o ponteiro acompanha a posição horizontal do mouse
+  hero.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    tracking = true;
+    gauge.classList.add('is-tracking');
+    const rect = hero.getBoundingClientRect();
+    setGauge((e.clientX - rect.left) / rect.width);
+  });
+  hero.addEventListener('pointerleave', () => {
+    tracking = false;
+    gauge.classList.remove('is-tracking');
+    showMode(modeIndex);
+  });
+}
+
+/* ---------- Cursor personalizado ---------- */
+const cursor = document.getElementById('cursor');
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+if (finePointer) {
+  const ring = document.getElementById('cursor-ring');
+  const dot = document.getElementById('cursor-dot');
+  let mx = -100, my = -100; // posição do mouse
+  let rx = -100, ry = -100; // posição do anel (com atraso)
+
+  window.addEventListener('pointermove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    dot.style.transform = `translate(${mx}px, ${my}px)`;
+    cursor.classList.add('is-visible');
+    const interactive = e.target.closest('a, button, [role="button"], .carousel');
+    cursor.classList.toggle('is-hover', Boolean(interactive));
+  });
+  document.addEventListener('pointerleave', () => cursor.classList.remove('is-visible'));
+  window.addEventListener('pointerdown', () => cursor.classList.add('is-down'));
+  window.addEventListener('pointerup', () => cursor.classList.remove('is-down'));
+
+  const follow = () => {
+    const ease = reduceMotion ? 1 : 0.18;
+    rx += (mx - rx) * ease;
+    ry += (my - ry) * ease;
+    const scale = cursor.classList.contains('is-hover') ? 1.6 : 1;
+    ring.style.transform = `translate(${rx}px, ${ry}px) scale(${scale})`;
+    requestAnimationFrame(follow);
+  };
+  requestAnimationFrame(follow);
+}
+
 /* ---------- Animação de entrada ---------- */
 const revealObserver = new IntersectionObserver((entries, obs) => {
   entries.forEach((entry) => {
