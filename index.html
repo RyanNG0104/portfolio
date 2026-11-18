@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ryan Moreira · Desenvolvedor Full-Stack</title>
+  <meta name="description" content="Portfólio de Ryan Moreira — Desenvolvedor Full-Stack, estudante de Engenharia de Software e entusiasta de IA Generativa com AWS." />
+  <meta name="author" content="Ryan Moreira" />
+  <meta name="theme-color" content="#0d0117" />
+
+  <meta property="og:title" content="Ryan Moreira · Desenvolvedor Full-Stack" />
+  <meta property="og:description" content="Back-end, APIs REST, React e IA Generativa com AWS." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/159392543?v=4" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script>
+    // Aplica o tema salvo antes de renderizar (evita "piscar")
+    try {
+      const t = localStorage.getItem('theme');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#inicio" class="nav__logo" aria-label="Início">
+        <span class="mono">&lt;</span>RM<span class="mono">/&gt;</span>
+      </a>
+
+      <nav class="nav__menu" id="nav-menu" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#experiencia">Experiência</a>
+        <a href="#tecnologias">Tecnologias</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="theme-toggle" aria-label="Alternar tema claro/escuro">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon-btn nav__burger" id="nav-burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="inicio">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow mono">Olá, mundo! Eu sou</p>
+          <h1 class="hero__title">Ryan Moreira</h1>
+          <p class="hero__role mono">
+            <span id="typing" aria-live="polite">Desenvolvedor Full-Stack</span><span class="caret" aria-hidden="true">|</span>
+          </p>
+          <p class="hero__lead">
+            Desenvolvedor de Sistemas na <strong>Itpower Software</strong>, construindo back-ends, APIs REST e
+            aplicações web. Hoje, meu foco é <strong>IA Generativa, LLMs e agentes com AWS</strong>.
+          </p>
+
+          <div class="hero__cta">
+            <a href="#projetos" class="btn btn--primary">Ver projetos</a>
+            <a href="#contato" class="btn btn--ghost">Fale comigo</a>
+          </div>
+
+          <ul class="socials" aria-label="Redes sociais">
+            <li><a href="https://github.com/RyanNG0104" target="_blank" rel="noopener" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+            </a></li>
+            <li><a href="https://www.linkedin.com/in/ryan-moreira-0426ba38a/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            </a></li>
+            <li><a href="mailto:moreiraryan803@gmail.com" aria-label="E-mail">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            </a></li>
+          </ul>
+        </div>
+
+        <div class="hero__visual">
+          <div class="avatar">
+            <img src="https://avatars.githubusercontent.com/u/159392543?v=4" alt="Foto de Ryan Moreira" width="320" height="320" />
+          </div>
+          <div class="code-card mono" aria-hidden="true">
+            <div class="code-card__bar"><i></i><i></i><i></i><span>ryan.js</span></div>
+<pre><span class="k">const</span> <span class="v">ryan</span> = {
+  <span class="p">cargo</span>: <span class="s">'Dev Full-Stack'</span>,
+  <span class="p">empresa</span>: <span class="s">'Itpower'</span>,
+  <span class="p">estudando</span>: [<span class="s">'IA Generativa'</span>, <span class="s">'AWS'</span>],
+  <span class="p">cafe</span>: <span class="b">true</span>,
+};</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SOBRE ===================== -->
+    <section class="section" id="sobre">
+      <div class="container">
+        <h2 class="section__title"><span class="mono">01.</span> Sobre mim</h2>
+        <div class="about">
+          <div class="about__text reveal">
+            <p>
+              Sou <strong>Ryan Moreira</strong>, desenvolvedor full-stack e estudante de
+              <strong>Engenharia de Software</strong>. Trabalho como Desenvolvedor de Sistemas na
+              <strong>Itpower Software</strong>, onde construo e mantenho sistemas web e APIs para clientes do setor de seguros.
+            </p>
+            <p>
+              Gosto de entender o problema de ponta a ponta: do banco de dados à interface. No dia a dia trabalho com
+              ColdFusion, JavaScript e SQL Server. Nos projetos pessoais exploro React, Node.js, Java com Spring Boot e Python.
+            </p>
+            <p>
+              Hoje estou mergulhando em <strong>IA Generativa</strong>: LLMs, agentes e como colocar isso em produção com a <strong>AWS</strong>.
+            </p>
+          </div>
+
+          <div class="focus reveal">
+            <div class="focus__item">
+              <span class="focus__icon" aria-hidden="true">💼</span>
+              <div><h3>Trabalhando em</h3><p>Sistemas web e APIs na Itpower</p></div>
+            </div>
+            <div class="focus__item">
+              <span class="focus__icon" aria-hidden="true">🧠</span>
+              <div><h3>Aprendendo</h3><p>IA Generativa, LLMs e agentes com AWS</p></div>
+            </div>
+            <div class="focus__item">
+              <span class="focus__icon" aria-hidden="true">💬</span>
+              <div><h3>Pode me perguntar sobre</h3><p>Back-end, APIs REST e bancos de dados</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EXPERIÊNCIA ===================== -->
+    <section class="section" id="experiencia">
+      <div class="container">
+        <h2 class="section__title"><span class="mono">02.</span> Experiência</h2>
+
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="card">
+              <div class="timeline__head">
+                <div>
+                  <h3>Desenvolvedor de Sistemas</h3>
+                  <p class="timeline__company">Itpower Software Ltda.</p>
+                </div>
+                <span class="tag tag--accent mono">2025 – Atual</span>
+              </div>
+              <ul class="bullets">
+                <li>Desenvolvimento back-end com ColdFusion, JavaScript e SQL Server</li>
+                <li>Criação e testes de APIs REST com Postman</li>
+                <li>Atendimento a clientes do setor de seguros (SulAmérica)</li>
+                <li>Rotina ágil com reuniões diárias e contato direto com clientes</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">ColdFusion</span><span class="tag">JavaScript</span><span class="tag">SQL Server</span><span class="tag">Postman</span><span class="tag">Scrum</span>
+              </div>
+            </div>
+          </li>
+          <li class="timeline__item reveal">
+            <div class="timeline__dot" aria-hidden="true"></div>
+            <div class="card">
+              <div class="timeline__head">
+                <div>
+                  <h3>Engenharia de Software</h3>
+                  <p class="timeline__company">Graduação</p>
+                </div>
+                <span class="tag tag--accent mono">Em andamento</span>
+              </div>
+              <p class="muted">Formação em desenvolvimento de software, arquitetura, banco de dados e engenharia de requisitos.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== TECNOLOGIAS ===================== -->
+    <section class="section" id="tecnologias">
+      <div class="container">
+        <h2 class="section__title"><span class="mono">03.</span> Tecnologias</h2>
+
+        <div class="skills">
+          <div class="skills__group card reveal">
+            <h3>Back-end</h3>
+            <div class="tags">
+              <span class="tag">Node.js</span><span class="tag">Java · Spring Boot</span><span class="tag">Python</span><span class="tag">ColdFusion</span><span class="tag">APIs REST</span>
+            </div>
+          </div>
+          <div class="skills__group card reveal">
+            <h3>Front-end</h3>
+            <div class="tags">
+              <span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">Vite</span><span class="tag">Tailwind CSS</span><span class="tag">HTML</span><span class="tag">CSS</span>
+            </div>
+          </div>
+          <div class="skills__group card reveal">
+            <h3>Dados</h3>
+            <div class="tags">
+              <span class="tag">SQL Server</span><span class="tag">MySQL</span><span class="tag">JPA / Hibernate</span>
+            </div>
+          </div>
+          <div class="skills__group card reveal">
+            <h3>Cloud &amp; IA</h3>
+            <div class="tags">
+              <span class="tag tag--accent">AWS</span><span class="tag tag--accent">IA Generativa</span><span class="tag tag--accent">LLMs</span><span class="tag tag--accent">Agentes</span>
+            </div>
+          </div>
+          <div class="skills__group card reveal">
+            <h3>Ferramentas</h3>
+            <div class="tags">
+              <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Postman</span><span class="tag">VS Code</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PROJETOS ===================== -->
+    <section class="section" id="projetos">
+      <div class="container">
+        <h2 class="section__title"><span class="mono">04.</span> Projetos</h2>
+
+        <div class="projects">
+          <article class="project card reveal">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">🚗</span>
+              <div class="project__links">
+                <a href="https://github.com/RyanNG0104/Digital-Drive" target="_blank" rel="noopener" aria-label="Código do Digital Drive no GitHub">Código ↗</a>
+              </div>
+            </div>
+            <h3>Digital Drive</h3>
+            <p>
+              Marketplace de carros novos e seminovos. SPA com rotas, login, cadastro de usuários,
+              anúncio e listagem de veículos, consumindo uma API REST simulada.
+            </p>
+            <div class="tags"><span class="tag">React</span><span class="tag">Vite</span><span class="tag">React Router</span><span class="tag">JSON Server</span></div>
+          </article>
+
+          <article class="project card reveal">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">📱</span>
+              <div class="project__links">
+                <a href="https://github.com/RyanNG0104/iphone17-react" target="_blank" rel="noopener" aria-label="Código da landing iPhone 17 no GitHub">Código ↗</a>
+              </div>
+            </div>
+            <h3>iPhone 17 · Landing Page</h3>
+            <p>
+              Página de produto inspirada no estilo da Apple, com hero em tela cheia, destaques,
+              seletor de cores e navegação, tudo componentizado.
+            </p>
+            <div class="tags"><span class="tag">React</span><span class="tag">Vite</span><span class="tag">Tailwind CSS</span></div>
+          </article>
+
+          <article class="project card reveal">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">☕</span>
+              <div class="project__links">
+                <a href="https://ryanng0104.github.io/COFFE-PAGE/" target="_blank" rel="noopener" aria-label="Ver NG Coffee online">Demo ↗</a>
+                <a href="https://github.com/RyanNG0104/COFFE-PAGE" target="_blank" rel="noopener" aria-label="Código do NG Coffee no GitHub">Código ↗</a>
+              </div>
+            </div>
+            <h3>NG Coffee</h3>
+            <p>
+              Landing page de cafeteria com seções de sobre, menu, depoimentos de clientes e endereço.
+              Publicada no GitHub Pages.
+            </p>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span></div>
+          </article>
+
+          <article class="project card reveal">
+            <div class="project__head">
+              <span class="project__icon" aria-hidden="true">🍕</span>
+              <div class="project__links">
+                <a href="https://github.com/RyanNG0104/pizzariacurso" target="_blank" rel="noopener" aria-label="Código da API Pizzaria no GitHub">Código ↗</a>
+              </div>
+            </div>
+            <h3>Pizzaria API</h3>
+            <p>
+              Base de uma API REST para pizzaria com Spring Boot, persistência via Spring Data JPA
+              e banco de dados SQL Server.
+            </p>
+            <div class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">JPA</span><span class="tag">SQL Server</span></div>
+          </article>
+        </div>
+
+        <div class="more">
+          <h3 class="more__title">Outros repositórios</h3>
+          <div class="repos" id="repos">
+            <p class="muted" id="repos-status">Carregando repositórios do GitHub…</p>
+          </div>
+          <a href="https://github.com/RyanNG0104?tab=repositories" target="_blank" rel="noopener" class="btn btn--ghost more__btn">Ver todos no GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTATO ===================== -->
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="contact card reveal">
+          <h2 class="section__title section__title--center"><span class="mono">05.</span> Vamos conversar?</h2>
+          <p class="contact__lead">
+            Estou aberto a oportunidades, projetos e trocas sobre back-end e IA Generativa.
+            Me chame no LinkedIn ou mande um e-mail.
+          </p>
+
+          <div class="contact__email">
+            <span class="mono" id="email-text">moreiraryan803@gmail.com</span>
+            <button class="btn btn--small" id="copy-email" type="button">Copiar</button>
+          </div>
+
+          <div class="hero__cta hero__cta--center">
+            <a href="mailto:moreiraryan803@gmail.com" class="btn btn--primary">Enviar e-mail</a>
+            <a href="https://www.linkedin.com/in/ryan-moreira-0426ba38a/" target="_blank" rel="noopener" class="btn btn--ghost">LinkedIn ↗</a>
+            <a href="https://github.com/RyanNG0104" target="_blank" rel="noopener" class="btn btn--ghost">GitHub ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> Ryan Moreira. Feito com HTML, CSS e JavaScript.</p>
+      <a href="#inicio" class="mono">↑ voltar ao topo</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
