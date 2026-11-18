@@ -4,23 +4,30 @@ Meu portfólio pessoal: desenvolvedor full-stack, estudante de Engenharia de Sof
 
 🔗 **Acesse:** https://ryanng0104.github.io/portfolio/
 
+## Design
+
+Linguagem visual inspirada em sites automotivos de luxo: preto, branco e um único vermelho,
+tipografia larga em caixa alta (Archivo Expanded), seções em tela cheia e muito respiro.
+
 ## Seções
 
-- **Início**: apresentação com efeito de digitação
-- **Sobre**: quem sou e no que estou focado
-- **Experiência**: Itpower Software e formação
-- **Tecnologias**: back-end, front-end, dados, cloud & IA
-- **Projetos**: destaques e repositórios carregados direto da API do GitHub
-- **Contato**: e-mail, LinkedIn e GitHub
+- **Hero**: apresentação em tela cheia com traçado de pista animado
+- **Ficha técnica**: números principais (o total de repositórios vem da API do GitHub)
+- **01 · Perfil**: quem sou e no que estou focado
+- **02 · Carreira**: Itpower Software e formação
+- **03 · Sob o capô**: tecnologias por categoria
+- **04 · A coleção**: projetos em destaque (carrossel) e outros repositórios
+- **05 · Contato**: e-mail, LinkedIn e GitHub
 
 ## Tecnologias
 
 HTML, CSS e JavaScript puros. Sem dependências e sem build. Inclui:
 
-- Tema claro e escuro (salvo no navegador)
-- Layout responsivo com menu mobile
+- Menu em tela cheia e navbar que muda de transparente para sólida
+- Carrossel com setas, teclado, swipe e barra de progresso
+- Layout responsivo
 - Animações de entrada que respeitam `prefers-reduced-motion`
-- Lista de repositórios atualizada automaticamente pela API pública do GitHub
+- Dados atualizados automaticamente pela API pública do GitHub
 
 ## Rodando localmente
 
