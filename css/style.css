@@ -597,7 +597,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   color: var(--fg);
 }
 
-/* ---------- Sob o capô ---------- */
+/* ---------- Tecnologias ---------- */
 .engine { border-top: 1px solid var(--night-rule); }
 .engine__row {
   display: grid;

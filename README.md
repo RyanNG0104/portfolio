@@ -18,7 +18,7 @@ O tema inicial segue a preferência do sistema e a escolha fica salva no navegad
 - **Ficha técnica**: números principais (o total de repositórios vem da API do GitHub)
 - **01 · Perfil**: quem sou e no que estou focado
 - **02 · Carreira**: Itpower Software e formação
-- **03 · Sob o capô**: tecnologias por categoria
+- **03 · Tecnologias**: stack por categoria
 - **04 · A coleção**: projetos em destaque (carrossel) e outros repositórios
 - **05 · Contato**: e-mail, LinkedIn e GitHub
 
