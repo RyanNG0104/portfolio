@@ -18,6 +18,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <script>
+    // Aplica o tema antes de renderizar (evita "piscar"): escolha salva ou preferência do sistema
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Pular para o conteúdo</a>
@@ -35,7 +47,13 @@
         <span class="wordmark__text">Ryan Moreira</span>
       </a>
 
-      <a href="#contato" class="nav__cta">Contato</a>
+      <div class="nav__right">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Mudar para o tema escuro">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a href="#contato" class="nav__cta">Contato</a>
+      </div>
     </div>
   </header>
 
@@ -66,24 +84,26 @@
     <section class="hero" id="inicio">
       <svg class="hero__track" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <path class="track track--ghost" d="M-40 760 C 260 760 340 520 620 520 S 980 700 1180 560 S 1400 260 1500 240" />
-        <path class="track track--red" d="M-40 760 C 260 760 340 520 620 520 S 980 700 1180 560 S 1400 260 1500 240" />
+        <path class="track track--line"d="M-40 760 C 260 760 340 520 620 520 S 980 700 1180 560 S 1400 260 1500 240" />
       </svg>
 
       <div class="hero__inner">
         <div class="hero__text">
           <p class="label label--light reveal">Portfólio · Edição 2026</p>
-          <h1 class="hero__title reveal">Ryan<br />Moreira</h1>
+          <h1 class="hero__title reveal">Ryan<br /><span class="hero__title-accent">Moreira</span></h1>
           <p class="hero__sub reveal">
             Desenvolvedor Full-Stack. Back-end, APIs REST e, agora, IA Generativa com AWS.
           </p>
           <div class="hero__cta reveal">
-            <a href="#colecao" class="btn btn--light">Descubra os projetos</a>
+            <a href="#colecao" class="btn btn--primary">Descubra os projetos</a>
             <a href="#contato" class="btn btn--outline-light">Fale comigo</a>
           </div>
         </div>
 
         <figure class="hero__portrait reveal">
-          <img src="https://avatars.githubusercontent.com/u/159392543?v=4" alt="Retrato de Ryan Moreira" width="460" height="460" />
+          <div class="hero__photo">
+            <img src="https://avatars.githubusercontent.com/u/159392543?v=4" alt="Retrato de Ryan Moreira" width="460" height="460" />
+          </div>
           <figcaption>
             <span>Desenvolvedor de Sistemas</span>
             <span>Itpower Software</span>
@@ -201,7 +221,7 @@
     </section>
 
     <!-- ===================== SOB O CAPÔ ===================== -->
-    <section class="section section--black" id="capo">
+    <section class="section section--night" id="capo">
       <div class="container">
         <header class="section__head reveal">
           <p class="label label--light">03 — Sob o capô</p>

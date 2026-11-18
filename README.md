@@ -6,8 +6,11 @@ Meu portfólio pessoal: desenvolvedor full-stack, estudante de Engenharia de Sof
 
 ## Design
 
-Linguagem visual inspirada em sites automotivos de luxo: preto, branco e roxo como cor de destaque,
+Linguagem visual inspirada em sites automotivos de luxo, em roxo, preto e branco:
 tipografia larga em caixa alta (Archivo Expanded), seções em tela cheia e muito respiro.
+
+Dois temas, alternados pelo botão na barra do topo: **claro** (branco + roxo) e **escuro** (preto + roxo).
+O tema inicial segue a preferência do sistema e a escolha fica salva no navegador.
 
 ## Seções
 

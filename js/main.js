@@ -19,6 +19,21 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 /* ---------- Ano no rodapé ---------- */
 document.getElementById('year').textContent = new Date().getFullYear();
 
+/* ---------- Tema claro / escuro ---------- */
+const root = document.documentElement;
+const themeBtn = document.getElementById('theme-toggle');
+
+function syncThemeButton() {
+  const dark = root.dataset.theme === 'dark';
+  themeBtn.setAttribute('aria-label', dark ? 'Mudar para o tema claro' : 'Mudar para o tema escuro');
+}
+themeBtn.addEventListener('click', () => {
+  root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  syncThemeButton();
+});
+syncThemeButton();
+
 /* ---------- Navbar: transparente no hero, sólida depois ---------- */
 const nav = document.getElementById('nav');
 const hero = document.getElementById('inicio');
