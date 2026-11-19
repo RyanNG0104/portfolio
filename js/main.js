@@ -6,7 +6,7 @@
    Se o navegador abrir um index.html velho (guardado em cache), este
    script, que é sempre o mais novo, detecta a diferença de versão,
    baixa a página atual e recarrega uma única vez. */
-const SITE_BUILD = '8';
+const SITE_BUILD = '9';
 (function ensureFreshPage() {
   const meta = document.querySelector('meta[name="site-build"]');
   if (meta && meta.content === SITE_BUILD) return;
